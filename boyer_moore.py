@@ -9,11 +9,11 @@ from typing import *
 # with "256" or any maximum code-point you want. For Unicode you may want to match in UTF-8
 # bytes instead of creating a 0x10FFFF-sized table.
 
-ALPHABET_SIZE = 26
+ALPHABET_SIZE = 256
 
 def alphabet_index(c: str) -> int:
     """Return the index of the given character in the English alphabet, counting from 0."""
-    val = ord(c.lower()) - ord("a")
+    val = ord(c)
     assert val >= 0 and val < ALPHABET_SIZE
     return val
 
@@ -118,7 +118,7 @@ def full_shift_table(S: str) -> list[int]:
         F[-i - 1] = longest
     return F
 
-def string_search(P, T) -> list[int]:
+def bm_search(P, T) -> list[int]:
     """
     Implementation of the Boyer-Moore string search algorithm. This finds all occurrences of P
     in T, and incorporates numerous ways of pre-processing the pattern to determine the optimal
